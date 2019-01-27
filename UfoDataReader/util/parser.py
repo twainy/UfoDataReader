@@ -420,6 +420,14 @@ class UfoXBRLParser(XBRLParser):
                                  options={'type': 'String',
                                           'no_context': True})
 
+        filing_date = \
+            xbrl.find_all(name=re.compile('jpcrp_cor:FilingDateCoverPage',
+                                          re.IGNORECASE | re.MULTILINE))
+        dei_obj.filing_date = \
+            self.data_processing(filing_date, xbrl, ignore_errors, logger,
+                                 options={'type': 'String',
+                                          'no_context': True})
+
         return dei_obj
 
 
@@ -500,7 +508,8 @@ class DEI(object):
                  accounting_standards='',
                  current_fy_start='',
                  current_fy_end='',
-                 type_of_current_period=''):
+                 type_of_current_period='',
+                 filing_date=''):
         self.edinet_code = edinet_code
         self.trading_symbol = trading_symbol
         self.company_name = company_name
@@ -508,3 +517,4 @@ class DEI(object):
         self.current_fy_start = current_fy_start
         self.current_fy_end = current_fy_end
         self.type_of_current_period = type_of_current_period
+        self.filing_date = filing_date
