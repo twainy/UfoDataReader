@@ -509,7 +509,7 @@ class DEI(object):
                  current_fy_start='',
                  current_fy_end='',
                  type_of_current_period='',
-                 filing_date=''):
+                 filing_date='1970-01-01'):
         self.edinet_code = edinet_code
         self.trading_symbol = trading_symbol
         self.company_name = company_name
