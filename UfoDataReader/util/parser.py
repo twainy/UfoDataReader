@@ -285,6 +285,18 @@ class UfoXBRLParser(XBRLParser):
         gaap_obj.net_assets = \
             self.data_processing(net_assets, xbrl, ignore_errors, logger, context_ids)
 
+        nb_employees = \
+            xbrl.find_all(name=re.compile('jppfs_cor:NumberOfEmployees',
+                                          re.IGNORECASE | re.MULTILINE))
+        gaap_obj.nb_employees = \
+            self.data_processing(nb_employees, xbrl, ignore_errors, logger, context_ids)
+
+        nb_stocks = \
+            xbrl.find_all(name=re.compile('jppfs_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults',
+                                          re.IGNORECASE | re.MULTILINE))
+        gaap_obj.nb_stocks = \
+            self.data_processing(nb_stocks, xbrl, ignore_errors, logger, context_ids)
+
         return gaap_obj
 
     @classmethod
@@ -479,7 +491,9 @@ class JapanGAAP(object):
                  cf_from_operating=0.0,
                  cf_from_investing=0.0,
                  cf_from_financing=0.0,
-                 shares_outstanding=0.0):
+                 shares_outstanding=0.0,
+                 nb_employees=0,
+                 nb_stocks=0):
         self.netsales = netsales
         self.ordinary_income_loss = ordinary_income_loss
         self.profit_loss = profit_loss
@@ -497,6 +511,8 @@ class JapanGAAP(object):
         self.cf_from_investing = cf_from_investing
         self.cf_from_financing = cf_from_financing
         self.shares_outstanding = shares_outstanding
+        self.nb_employees = nb_employees
+        self.nb_stocks = nb_stocks
 
 
 # Base DEI object
