@@ -286,13 +286,13 @@ class UfoXBRLParser(XBRLParser):
             self.data_processing(net_assets, xbrl, ignore_errors, logger, context_ids)
 
         nb_employees = \
-            xbrl.find_all(name=re.compile('jppfs_cor:NumberOfEmployees',
+            xbrl.find_all(name=re.compile('jpcrp_cor:NumberOfEmployees',
                                           re.IGNORECASE | re.MULTILINE))
         gaap_obj.nb_employees = \
             self.data_processing(nb_employees, xbrl, ignore_errors, logger, context_ids)
 
         nb_stocks = \
-            xbrl.find_all(name=re.compile('jppfs_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults',
+            xbrl.find_all(name=re.compile('jpcrp_cor:TotalNumberOfIssuedSharesSummaryOfBusinessResults',
                                           re.IGNORECASE | re.MULTILINE))
         gaap_obj.nb_stocks = \
             self.data_processing(nb_stocks, xbrl, ignore_errors, logger, context_ids)
